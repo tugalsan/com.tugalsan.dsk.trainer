@@ -1,6 +1,7 @@
 module com.tugalsan.trm.trainer {
     requires gwt.user;
     requires java.desktop;
+    requires AbsoluteLayout.RELEASE120;
     requires com.tugalsan.api.log;
     requires com.tugalsan.api.string;
     requires com.tugalsan.api.thread;
