@@ -133,7 +133,7 @@ public class Main extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        Arrays.asList(javax.swing.UIManager.getInstalledLookAndFeels()).stream()
+        Arrays.stream(javax.swing.UIManager.getInstalledLookAndFeels())
                 .filter(info -> "Nimbus".equals(info.getName()))
                 .forEach(info -> TGS_UnSafe.execute(() -> javax.swing.UIManager.setLookAndFeel(info.getClassName()), e -> d.ct("main", e)));
         //</editor-fold>
