@@ -12,7 +12,9 @@ import com.tugalsan.api.log.server.*;
 import com.tugalsan.api.shape.client.*;
 import com.tugalsan.api.string.server.*;
 import com.tugalsan.api.thread.server.*;
+import com.tugalsan.api.unsafe.client.*;
 import java.nio.file.Path;
+import java.util.*;
 import javax.swing.JOptionPane;
 
 /**
@@ -131,16 +133,9 @@ public class Main extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (Exception ex) {
-            d.ct("main", ex);
-        }
+        Arrays.asList(javax.swing.UIManager.getInstalledLookAndFeels()).stream()
+                .filter(info -> "Nimbus".equals(info.getName()))
+                .forEach(info -> TGS_UnSafe.execute(() -> javax.swing.UIManager.setLookAndFeel(info.getClassName()), e -> d.ct("main", e)));
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
