@@ -23,7 +23,7 @@ import javax.swing.JOptionPane;
  */
 public class Main extends javax.swing.JFrame {
 
-    final private static TS_Log d = new TS_Log(Main.class.getSimpleName());
+    final private static TS_Log d = new TS_Log(Main.class);
 
     /**
      * Creates new form NewJFrame
