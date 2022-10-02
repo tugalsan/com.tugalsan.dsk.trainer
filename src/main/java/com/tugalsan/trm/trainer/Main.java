@@ -117,7 +117,7 @@ public class Main extends javax.swing.JFrame {
                 var codeLines = TS_StringUtils.toList(codeAll, "\n");
                 codeLines.stream().forEachOrdered(codeLine -> execute(codeLine));
                 while (cbRepeat.isSelected()) {
-                    TS_ThreadWait.seconds(null, 5, "");
+                    TS_ThreadWait.seconds(null, 5);
                     codeLines.stream().forEachOrdered(codeLine -> execute(codeLine));
                 }
             }
@@ -149,7 +149,7 @@ public class Main extends javax.swing.JFrame {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        TS_ThreadWait.seconds(null, 1, "");
+                        TS_ThreadWait.seconds(null, 1);
                         w.lblStatus.setText(TS_InputMouseUtils.getLocation().toString());
                         run();
                     }
@@ -185,7 +185,7 @@ public class Main extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Cannot parse sec to Integer->[" + secStr + "]");
                 return;
             }
-            TS_ThreadWait.seconds(null, sec, "");
+            TS_ThreadWait.seconds(null, sec);
         } else if (codeLine.startsWith(CODE_TYPE)) {
             var text = codeLine.substring(CODE_TYPE.length() + 1);
             TS_InputKeyboardUtils.typeString(text);
