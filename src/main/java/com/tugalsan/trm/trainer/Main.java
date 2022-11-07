@@ -110,18 +110,15 @@ public class Main extends javax.swing.JFrame {
 
     private void btnRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRunActionPerformed
         // TODO add your handling code here:
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                var codeAll = taCode.getText();
-                var codeLines = TS_StringUtils.toList(codeAll, "\n");
+        TS_ThreadRun.now(() -> {
+            var codeAll = taCode.getText();
+            var codeLines = TS_StringUtils.toList(codeAll, "\n");
+            codeLines.stream().forEachOrdered(codeLine -> execute(codeLine));
+            while (cbRepeat.isSelected()) {
+                TS_ThreadWait.seconds(null, 5);
                 codeLines.stream().forEachOrdered(codeLine -> execute(codeLine));
-                while (cbRepeat.isSelected()) {
-                    TS_ThreadWait.seconds(null, 5);
-                    codeLines.stream().forEachOrdered(codeLine -> execute(codeLine));
-                }
             }
-        }).start();
+        });
     }//GEN-LAST:event_btnRunActionPerformed
 
     /**
@@ -146,14 +143,11 @@ public class Main extends javax.swing.JFrame {
             public void run() {
                 var w = new Main();
                 w.setVisible(true);
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        TS_ThreadWait.seconds(null, 1);
-                        w.lblStatus.setText(TS_InputMouseUtils.getLocation().toString());
-                        run();
-                    }
-                }).start();
+                TS_ThreadRun.now(() -> {
+                    TS_ThreadWait.seconds(null, 1);
+                    w.lblStatus.setText(TS_InputMouseUtils.getLocation().toString());
+                    run();
+                });
             }
         });
     }
