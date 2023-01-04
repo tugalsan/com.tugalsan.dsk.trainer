@@ -22,6 +22,8 @@ import javax.swing.JOptionPane;
  * @author me
  */
 public class Main extends javax.swing.JFrame {
+    //cd C:\me\codes\com.tugalsan\trm\com.tugalsan.trm.trainer
+    //java --enable-preview --add-modules jdk.incubator.concurrent -jar target/com.tugalsan.trm.trainer-1.0-SNAPSHOT-jar-with-dependencies.jar
 
     final private static TS_Log d = new TS_Log(Main.class);
 
@@ -146,7 +148,6 @@ public class Main extends javax.swing.JFrame {
                 TS_ThreadRun.now(() -> {
                     TS_ThreadWait.seconds(null, 1);
                     w.lblStatus.setText(TS_InputMouseUtils.getLocation().toString());
-                    run();
                 });
             }
         });
@@ -183,6 +184,23 @@ public class Main extends javax.swing.JFrame {
         } else if (codeLine.startsWith(CODE_TYPE)) {
             var text = codeLine.substring(CODE_TYPE.length() + 1);
             TS_InputKeyboardUtils.typeString(text);
+        } else if (codeLine.startsWith(CODE_MOVE)) {
+            var tags = TS_StringUtils.toList_spc(codeLine);
+            if (tags.size() != 3) {
+                JOptionPane.showMessageDialog(null, "Code should have 3 tokens->[" + codeLine + "]");
+                return;
+            }
+            Integer x = TGS_CastUtils.toInteger(tags.get(1));
+            if (x == null) {
+                JOptionPane.showMessageDialog(null, "Cannot parse x to Integer->[" + tags.get(1) + "]");
+                return;
+            }
+            Integer y = TGS_CastUtils.toInteger(tags.get(2));
+            if (y == null) {
+                JOptionPane.showMessageDialog(null, "Cannot parse y to Integer->[" + tags.get(2) + "]");
+                return;
+            }
+            TS_InputMouseUtils.mouseMove(new TGS_ShapeLocation(x, y));
         } else if (codeLine.startsWith(CODE_CLICK_LEFT)) {
             var tags = TS_StringUtils.toList_spc(codeLine);
             if (tags.size() != 3) {
@@ -223,4 +241,5 @@ public class Main extends javax.swing.JFrame {
     public static String CODE_WAIT = "WAIT";
     public static String CODE_CLICK_LEFT = "CLICK_LEFT";
     public static String CODE_CLICK_RIGHT = "CLICK_RIGHT";
+    public static String CODE_MOVE = "MOVE";
 }
