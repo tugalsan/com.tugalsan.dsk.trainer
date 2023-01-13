@@ -15,6 +15,8 @@ import com.tugalsan.api.thread.server.*;
 import com.tugalsan.api.unsafe.client.*;
 import java.nio.file.Path;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import javax.swing.JOptionPane;
 
 /**
@@ -32,6 +34,7 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
+        taCode.setText(testCode());
     }
 
     /**
@@ -201,6 +204,40 @@ public class Main extends javax.swing.JFrame {
                 return;
             }
             TS_InputMouseUtils.mouseMove(new TGS_ShapeLocation(x, y));
+        } else if (codeLine.startsWith(CODE_PRESS_LEFT)) {
+            var tags = TS_StringUtils.toList_spc(codeLine);
+            if (tags.size() != 3) {
+                JOptionPane.showMessageDialog(null, "Code should have 3 tokens->[" + codeLine + "]");
+                return;
+            }
+            Integer x = TGS_CastUtils.toInteger(tags.get(1));
+            if (x == null) {
+                JOptionPane.showMessageDialog(null, "Cannot parse x to Integer->[" + tags.get(1) + "]");
+                return;
+            }
+            Integer y = TGS_CastUtils.toInteger(tags.get(2));
+            if (y == null) {
+                JOptionPane.showMessageDialog(null, "Cannot parse y to Integer->[" + tags.get(2) + "]");
+                return;
+            }
+            TS_InputMouseUtils.mousePressLeft();
+        } else if (codeLine.startsWith(CODE_RELEASE_LEFT)) {
+            var tags = TS_StringUtils.toList_spc(codeLine);
+            if (tags.size() != 3) {
+                JOptionPane.showMessageDialog(null, "Code should have 3 tokens->[" + codeLine + "]");
+                return;
+            }
+            Integer x = TGS_CastUtils.toInteger(tags.get(1));
+            if (x == null) {
+                JOptionPane.showMessageDialog(null, "Cannot parse x to Integer->[" + tags.get(1) + "]");
+                return;
+            }
+            Integer y = TGS_CastUtils.toInteger(tags.get(2));
+            if (y == null) {
+                JOptionPane.showMessageDialog(null, "Cannot parse y to Integer->[" + tags.get(2) + "]");
+                return;
+            }
+            TS_InputMouseUtils.mouseClickLeft(new TGS_ShapeLocation(x, y));
         } else if (codeLine.startsWith(CODE_CLICK_LEFT)) {
             var tags = TS_StringUtils.toList_spc(codeLine);
             if (tags.size() != 3) {
@@ -239,7 +276,54 @@ public class Main extends javax.swing.JFrame {
     }
     public static String CODE_TYPE = "TYPE";
     public static String CODE_WAIT = "WAIT";
+    public static String CODE_PRESS_LEFT = "PRESS_LEFT";
+    public static String CODE_RELEASE_LEFT = "RELEASE_LEFT";
     public static String CODE_CLICK_LEFT = "CLICK_LEFT";
     public static String CODE_CLICK_RIGHT = "CLICK_RIGHT";
     public static String CODE_MOVE = "MOVE";
+    
+    
+    
+    public static String testCode(int i) {
+        return """
+               CLICK_LEFT -310 100
+               WAIT 1
+               CLICK_LEFT -310 160
+               WAIT 2
+               
+               CLICK_LEFT -700 215
+               CLICK_LEFT -580 250
+               WAIT 1
+               TYPE fai
+               CLICK_LEFT -580 290
+               CLICK_LEFT -580 290
+               WAIT 1
+               TYPE BOGUS
+               CLICK_LEFT -580 290
+               CLICK_LEFT -580 290
+               WAIT 1
+               TYPE %d
+               CLICK_LEFT -580 350
+               TYPE %d
+               
+               CLICK_LEFT -370 390
+               WAIT 1
+               CLICK_LEFT -220 480
+               WAIT 1
+               CLICK_LEFT -450 460
+               WAIT 1
+               CLICK_LEFT -450 520
+               WAIT 1
+               
+               
+               
+               
+               """.formatted(i, i);
+    }
+
+    public static String testCode() {
+        return IntStream.range(165, 180)
+                .mapToObj(i -> testCode(i))
+                .collect(Collectors.joining(""));
+    }
 }
