@@ -7,7 +7,7 @@ module com.tugalsan.trm.trainer {
     requires com.tugalsan.api.unsafe;
     requires com.tugalsan.api.thread;
     requires com.tugalsan.api.cast;
-    requires com.tugalsan.api.executable;
+    requires com.tugalsan.api.runnable;
     requires com.tugalsan.api.shape;
     requires com.tugalsan.api.input;
     requires com.tugalsan.api.file;

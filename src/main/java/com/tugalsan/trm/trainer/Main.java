@@ -137,7 +137,7 @@ public class Main extends javax.swing.JFrame {
          */
         Arrays.stream(javax.swing.UIManager.getInstalledLookAndFeels())
                 .filter(info -> "Nimbus".equals(info.getName()))
-                .forEach(info -> TGS_UnSafe.execute(() -> javax.swing.UIManager.setLookAndFeel(info.getClassName()), e -> d.ct("main", e)));
+                .forEach(info -> TGS_UnSafe.run(() -> javax.swing.UIManager.setLookAndFeel(info.getClassName()), e -> d.ct("main", e)));
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
