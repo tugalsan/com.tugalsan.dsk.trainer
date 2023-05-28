@@ -27,7 +27,7 @@ public class Main extends javax.swing.JFrame {
     //cd C:\me\codes\com.tugalsan\trm\com.tugalsan.trm.trainer
     //java --enable-preview --add-modules jdk.incubator.concurrent -jar target/com.tugalsan.trm.trainer-1.0-SNAPSHOT-jar-with-dependencies.jar
 
-    final private static TS_Log d = new TS_Log(Main.class);
+    final private static TS_Log d = TS_Log.of(Main.class);
 
     /**
      * Creates new form NewJFrame
