@@ -11,7 +11,8 @@ import com.tugalsan.api.input.server.*;
 import com.tugalsan.api.log.server.*;
 import com.tugalsan.api.shape.client.*;
 import com.tugalsan.api.string.server.*;
-import com.tugalsan.api.thread.server.*;
+import com.tugalsan.api.thread.server.async.TS_ThreadAsync;
+import com.tugalsan.api.thread.server.TS_ThreadWait;
 import com.tugalsan.api.unsafe.client.*;
 import java.nio.file.Path;
 import java.util.*;
@@ -115,7 +116,7 @@ public class Main extends javax.swing.JFrame {
 
     private void btnRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRunActionPerformed
         // TODO add your handling code here:
-        TS_ThreadRun.now(() -> {
+        TS_ThreadAsync.now(() -> {
             var codeAll = taCode.getText();
             var codeLines = TS_StringUtils.toList(codeAll, "\n");
             codeLines.stream().forEachOrdered(codeLine -> execute(codeLine));
@@ -148,7 +149,7 @@ public class Main extends javax.swing.JFrame {
             public void run() {
                 var w = new Main();
                 w.setVisible(true);
-                TS_ThreadRun.now(() -> {
+                TS_ThreadAsync.now(() -> {
                     TS_ThreadWait.seconds(null, 1);
                     w.lblStatus.setText(TS_InputMouseUtils.getLocation().toString());
                 });
