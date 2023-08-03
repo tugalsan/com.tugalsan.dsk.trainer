@@ -11,7 +11,7 @@ import com.tugalsan.api.input.server.*;
 import com.tugalsan.api.log.server.*;
 import com.tugalsan.api.shape.client.*;
 import com.tugalsan.api.string.server.*;
-import com.tugalsan.api.thread.server.struct.async.TS_ThreadAsync;
+import com.tugalsan.api.thread.server.async.TS_ThreadAsync;
 import com.tugalsan.api.thread.server.TS_ThreadWait;
 import com.tugalsan.api.unsafe.client.*;
 import java.nio.file.Path;
