@@ -13,7 +13,7 @@ import com.tugalsan.api.shape.client.*;
 import com.tugalsan.api.string.server.*;
 import com.tugalsan.api.thread.server.async.TS_ThreadAsync;
 import com.tugalsan.api.thread.server.TS_ThreadWait;
-import com.tugalsan.api.thread.server.safe.TS_ThreadSafeTrigger;
+import com.tugalsan.api.thread.server.sync.TS_ThreadSyncTrigger;
 import com.tugalsan.api.unsafe.client.*;
 import java.nio.file.Path;
 import java.util.*;
@@ -30,7 +30,7 @@ public class Main extends javax.swing.JFrame {
     //java --enable-preview --add-modules jdk.incubator.concurrent -jar target/com.tugalsan.trm.trainer-1.0-SNAPSHOT-jar-with-dependencies.jar
 
     final private static TS_Log d = TS_Log.of(Main.class);
-    final private static TS_ThreadSafeTrigger killTrigger = TS_ThreadSafeTrigger.of();
+    final private static TS_ThreadSyncTrigger killTrigger = TS_ThreadSyncTrigger.of();
 
     /**
      * Creates new form NewJFrame
