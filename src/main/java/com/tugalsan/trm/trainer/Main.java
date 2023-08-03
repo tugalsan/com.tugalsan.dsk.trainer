@@ -13,6 +13,7 @@ import com.tugalsan.api.shape.client.*;
 import com.tugalsan.api.string.server.*;
 import com.tugalsan.api.thread.server.async.TS_ThreadAsync;
 import com.tugalsan.api.thread.server.TS_ThreadWait;
+import com.tugalsan.api.thread.server.safe.TS_ThreadSafeTrigger;
 import com.tugalsan.api.unsafe.client.*;
 import java.nio.file.Path;
 import java.util.*;
@@ -29,6 +30,7 @@ public class Main extends javax.swing.JFrame {
     //java --enable-preview --add-modules jdk.incubator.concurrent -jar target/com.tugalsan.trm.trainer-1.0-SNAPSHOT-jar-with-dependencies.jar
 
     final private static TS_Log d = TS_Log.of(Main.class);
+    final private static TS_ThreadSafeTrigger killTrigger = TS_ThreadSafeTrigger.of();
 
     /**
      * Creates new form NewJFrame
@@ -116,12 +118,12 @@ public class Main extends javax.swing.JFrame {
 
     private void btnRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRunActionPerformed
         // TODO add your handling code here:
-        TS_ThreadAsync.now(() -> {
+        TS_ThreadAsync.now(killTrigger, rt -> {
             var codeAll = taCode.getText();
             var codeLines = TS_StringUtils.toList(codeAll, "\n");
             codeLines.stream().forEachOrdered(codeLine -> execute(codeLine));
             while (cbRepeat.isSelected()) {
-                TS_ThreadWait.seconds(null, 5);
+                TS_ThreadWait.seconds(d.className, killTrigger, 5);
                 codeLines.stream().forEachOrdered(codeLine -> execute(codeLine));
             }
         });
@@ -149,8 +151,8 @@ public class Main extends javax.swing.JFrame {
             public void run() {
                 var w = new Main();
                 w.setVisible(true);
-                TS_ThreadAsync.now(() -> {
-                    TS_ThreadWait.seconds(null, 1);
+                TS_ThreadAsync.now(killTrigger, kt -> {
+                    TS_ThreadWait.seconds(d.className, killTrigger, 1);
                     w.lblStatus.setText(TS_InputMouseUtils.getLocation().toString());
                 });
             }
@@ -184,7 +186,7 @@ public class Main extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Cannot parse sec to Integer->[" + secStr + "]");
                 return;
             }
-            TS_ThreadWait.seconds(null, sec);
+            TS_ThreadWait.seconds(d.className, killTrigger, sec);
         } else if (codeLine.startsWith(CODE_TYPE)) {
             var text = codeLine.substring(CODE_TYPE.length() + 1);
             TS_InputKeyboardUtils.typeString(text);
@@ -282,9 +284,7 @@ public class Main extends javax.swing.JFrame {
     public static String CODE_CLICK_LEFT = "CLICK_LEFT";
     public static String CODE_CLICK_RIGHT = "CLICK_RIGHT";
     public static String CODE_MOVE = "MOVE";
-    
-    
-    
+
     public static String testCode(int i) {
         return """
                CLICK_LEFT -310 100
