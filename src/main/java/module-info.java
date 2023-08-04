@@ -1,4 +1,4 @@
-module com.tugalsan.trm.trainer {
+module com.tugalsan.dsk.trainer {
     requires gwt.user;
     requires java.desktop;
     requires AbsoluteLayout.RELEASE120;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.tugalsan.trm.trainer;
+package com.tugalsan.dsk.trainer;
 
 import com.tugalsan.api.cast.client.*;
 import com.tugalsan.api.file.txt.server.*;
