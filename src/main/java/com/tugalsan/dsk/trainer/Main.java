@@ -7,14 +7,15 @@ package com.tugalsan.dsk.trainer;
 
 import com.tugalsan.api.cast.client.*;
 import com.tugalsan.api.file.txt.server.*;
+import com.tugalsan.api.function.client.maythrow.checkedexceptions.TGS_FuncMTCEUtils;
 import com.tugalsan.api.input.server.*;
 import com.tugalsan.api.log.server.*;
 import com.tugalsan.api.shape.client.*;
 import com.tugalsan.api.string.server.*;
-import com.tugalsan.api.thread.server.async.TS_ThreadAsync;
-import com.tugalsan.api.thread.server.TS_ThreadWait;
+import com.tugalsan.api.thread.server.async.run.TS_ThreadAsyncRun;
+import com.tugalsan.api.thread.server.sync.TS_ThreadSyncWait;
 import com.tugalsan.api.thread.server.sync.TS_ThreadSyncTrigger;
-import com.tugalsan.api.unsafe.client.*;
+
 import java.nio.file.Path;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -118,12 +119,12 @@ public class Main extends javax.swing.JFrame {
 
     private void btnRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRunActionPerformed
         // TODO add your handling code here:
-        TS_ThreadAsync.now(killTrigger, rt -> {
+        TS_ThreadAsyncRun.now(killTrigger, rt -> {
             var codeAll = taCode.getText();
             var codeLines = TS_StringUtils.toList(codeAll, "\n");
             codeLines.stream().forEachOrdered(codeLine -> execute(codeLine));
             while (cbRepeat.isSelected()) {
-                TS_ThreadWait.seconds(d.className, killTrigger, 5);
+                TS_ThreadSyncWait.seconds(d.className, killTrigger, 5);
                 codeLines.stream().forEachOrdered(codeLine -> execute(codeLine));
             }
         });
@@ -140,7 +141,7 @@ public class Main extends javax.swing.JFrame {
          */
         Arrays.stream(javax.swing.UIManager.getInstalledLookAndFeels())
                 .filter(info -> "Nimbus".equals(info.getName()))
-                .forEach(info -> TGS_UnSafe.run(() -> javax.swing.UIManager.setLookAndFeel(info.getClassName()), e -> d.ct("main", e)));
+                .forEach(info -> TGS_FuncMTCEUtils.run(() -> javax.swing.UIManager.setLookAndFeel(info.getClassName()), e -> d.ct("main", e)));
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -152,8 +153,8 @@ public class Main extends javax.swing.JFrame {
             public void run() {
                 var w = new Main();
                 w.setVisible(true);
-                TS_ThreadAsync.now(killTrigger, kt -> {
-                    TS_ThreadWait.seconds(d.className, killTrigger, 1);
+                TS_ThreadAsyncRun.now(killTrigger, kt -> {
+                    TS_ThreadSyncWait.seconds(d.className, killTrigger, 1);
                     w.lblStatus.setText(TS_InputMouseUtils.getLocation().toString());
                 });
             }
@@ -187,7 +188,7 @@ public class Main extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Cannot parse sec to Integer->[" + secStr + "]");
                 return;
             }
-            TS_ThreadWait.seconds(d.className, killTrigger, sec);
+            TS_ThreadSyncWait.seconds(d.className, killTrigger, sec);
         } else if (codeLine.startsWith(CODE_TYPE)) {
             var text = codeLine.substring(CODE_TYPE.length() + 1);
             TS_InputKeyboardUtils.typeString(text);
