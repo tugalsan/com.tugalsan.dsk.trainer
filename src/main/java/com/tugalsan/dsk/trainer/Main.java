@@ -183,7 +183,7 @@ public class Main extends javax.swing.JFrame {
                 return;
             }
             var secStr = tags.get(1);
-            Integer sec = TGS_CastUtils.toInteger(secStr);
+            Integer sec = TGS_CastUtils.toInteger(secStr).orElse(null);
             if (sec == null) {
                 JOptionPane.showMessageDialog(null, "Cannot parse sec to Integer->[" + secStr + "]");
                 return;
@@ -198,12 +198,12 @@ public class Main extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Code should have 3 tokens->[" + codeLine + "]");
                 return;
             }
-            Integer x = TGS_CastUtils.toInteger(tags.get(1));
+            Integer x = TGS_CastUtils.toInteger(tags.get(1)).orElse(null);
             if (x == null) {
                 JOptionPane.showMessageDialog(null, "Cannot parse x to Integer->[" + tags.get(1) + "]");
                 return;
             }
-            Integer y = TGS_CastUtils.toInteger(tags.get(2));
+            Integer y = TGS_CastUtils.toInteger(tags.get(2)).orElse(null);
             if (y == null) {
                 JOptionPane.showMessageDialog(null, "Cannot parse y to Integer->[" + tags.get(2) + "]");
                 return;
@@ -215,12 +215,12 @@ public class Main extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Code should have 3 tokens->[" + codeLine + "]");
                 return;
             }
-            Integer x = TGS_CastUtils.toInteger(tags.get(1));
+            Integer x = TGS_CastUtils.toInteger(tags.get(1)).orElse(null);
             if (x == null) {
                 JOptionPane.showMessageDialog(null, "Cannot parse x to Integer->[" + tags.get(1) + "]");
                 return;
             }
-            Integer y = TGS_CastUtils.toInteger(tags.get(2));
+            Integer y = TGS_CastUtils.toInteger(tags.get(2)).orElse(null);
             if (y == null) {
                 JOptionPane.showMessageDialog(null, "Cannot parse y to Integer->[" + tags.get(2) + "]");
                 return;
@@ -232,12 +232,12 @@ public class Main extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Code should have 3 tokens->[" + codeLine + "]");
                 return;
             }
-            Integer x = TGS_CastUtils.toInteger(tags.get(1));
+            Integer x = TGS_CastUtils.toInteger(tags.get(1)).orElse(null);
             if (x == null) {
                 JOptionPane.showMessageDialog(null, "Cannot parse x to Integer->[" + tags.get(1) + "]");
                 return;
             }
-            Integer y = TGS_CastUtils.toInteger(tags.get(2));
+            Integer y = TGS_CastUtils.toInteger(tags.get(2)).orElse(null);
             if (y == null) {
                 JOptionPane.showMessageDialog(null, "Cannot parse y to Integer->[" + tags.get(2) + "]");
                 return;
@@ -249,12 +249,12 @@ public class Main extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Code should have 3 tokens->[" + codeLine + "]");
                 return;
             }
-            Integer x = TGS_CastUtils.toInteger(tags.get(1));
+            Integer x = TGS_CastUtils.toInteger(tags.get(1)).orElse(null);
             if (x == null) {
                 JOptionPane.showMessageDialog(null, "Cannot parse x to Integer->[" + tags.get(1) + "]");
                 return;
             }
-            Integer y = TGS_CastUtils.toInteger(tags.get(2));
+            Integer y = TGS_CastUtils.toInteger(tags.get(2)).orElse(null);
             if (y == null) {
                 JOptionPane.showMessageDialog(null, "Cannot parse y to Integer->[" + tags.get(2) + "]");
                 return;
@@ -266,12 +266,12 @@ public class Main extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Code should have 3 tokens->[" + codeLine + "]");
                 return;
             }
-            Integer x = TGS_CastUtils.toInteger(tags.get(1));
+            Integer x = TGS_CastUtils.toInteger(tags.get(1)).orElse(null);
             if (x == null) {
                 JOptionPane.showMessageDialog(null, "Cannot parse x to Integer->[" + tags.get(1) + "]");
                 return;
             }
-            Integer y = TGS_CastUtils.toInteger(tags.get(2));
+            Integer y = TGS_CastUtils.toInteger(tags.get(2)).orElse(null);
             if (y == null) {
                 JOptionPane.showMessageDialog(null, "Cannot parse y to Integer->[" + tags.get(2) + "]");
                 return;
