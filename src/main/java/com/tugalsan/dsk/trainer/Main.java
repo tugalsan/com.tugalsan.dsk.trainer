@@ -31,7 +31,7 @@ public class Main extends javax.swing.JFrame {
     //java --enable-preview --add-modules jdk.incubator.vector -jar target/com.tugalsan.trm.trainer-1.0-SNAPSHOT-jar-with-dependencies.jar
 
     final private static TS_Log d = TS_Log.of(Main.class);
-    final private static TS_ThreadSyncTrigger killTrigger = TS_ThreadSyncTrigger.of();
+    final private static TS_ThreadSyncTrigger killTrigger = TS_ThreadSyncTrigger.of("main");
 
     /**
      * Creates new form NewJFrame
@@ -119,9 +119,9 @@ public class Main extends javax.swing.JFrame {
 
     private void btnRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRunActionPerformed
         // TODO add your handling code here:
-        TS_ThreadAsyncRun.now(killTrigger, rt -> {
+        TS_ThreadAsyncRun.now(killTrigger.newChild("btnRunActionPerformed"), rt -> {
             var codeAll = taCode.getText();
-            var codeLines = TS_StringUtils.toList(codeAll, "\n");
+            var codeLines = TS_StringUtils.jre().toList(codeAll, "\n");
             codeLines.stream().forEachOrdered(codeLine -> execute(codeLine));
             while (cbRepeat.isSelected()) {
                 TS_ThreadSyncWait.seconds(d.className, killTrigger, 5);
@@ -153,7 +153,7 @@ public class Main extends javax.swing.JFrame {
             public void run() {
                 var w = new Main();
                 w.setVisible(true);
-                TS_ThreadAsyncRun.now(killTrigger, kt -> {
+                TS_ThreadAsyncRun.now(killTrigger.newChild("gui"), kt -> {
                     TS_ThreadSyncWait.seconds(d.className, killTrigger, 1);
                     w.lblStatus.setText(TS_InputMouseUtils.getLocation().toString());
                 });
