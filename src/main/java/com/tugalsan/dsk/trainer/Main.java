@@ -7,7 +7,7 @@ package com.tugalsan.dsk.trainer;
 
 import com.tugalsan.api.cast.client.*;
 import com.tugalsan.api.file.txt.server.*;
-import com.tugalsan.api.function.client.maythrow.checkedexceptions.TGS_FuncMTCEUtils;
+import com.tugalsan.api.function.client.maythrowexceptions.checked.TGS_FuncMTCUtils;
 import com.tugalsan.api.input.server.*;
 import com.tugalsan.api.log.server.*;
 import com.tugalsan.api.shape.client.*;
@@ -141,7 +141,7 @@ public class Main extends javax.swing.JFrame {
          */
         Arrays.stream(javax.swing.UIManager.getInstalledLookAndFeels())
                 .filter(info -> "Nimbus".equals(info.getName()))
-                .forEach(info -> TGS_FuncMTCEUtils.run(() -> javax.swing.UIManager.setLookAndFeel(info.getClassName()), e -> d.ct("main", e)));
+                .forEach(info -> TGS_FuncMTCUtils.run(() -> javax.swing.UIManager.setLookAndFeel(info.getClassName()), e -> d.ct("main", e)));
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
